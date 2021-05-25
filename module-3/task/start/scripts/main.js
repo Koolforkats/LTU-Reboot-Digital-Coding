@@ -71,3 +71,82 @@ console.log(checkNumber(25));
 console.log(checkNumber(34));
 console.log(checkNumber(14));
 console.log(checkNumber(12));
+
+function drinkOrder(drink,size){
+    //console.log(drink);
+    //console.log(size);
+    let strMessage = 'you have ordered a ' + size;
+    blnValidated = true;
+    if(size != 'large' && size != 'medium' && size != 'small'){
+        blnValidated = false;
+        strMessage = 'you have ordered a size we do not sell';
+    }
+    if(blnValidated){
+    switch(drink){
+        case 'cola':
+            strMessage += ' Coca-Cola';
+            break;
+        case 'lemon':
+            strMessage += ' Schweppes';
+            break;
+        case 'orange':
+            strMessage += ' Tango';
+            break;   
+        default:
+            strMessage = 'You have ordered a drink we do not sell';
+            break;         
+    }
+}
+    console.log(strMessage);
+}
+drinkOrder('cola', 'small');
+drinkOrder('lemon', 'small');
+drinkOrder('orange', 'seymour');
+drinkOrder('orange', 'large');
+drinkOrder('coffee', 'seymour');
+
+function calculator(number1,number2,operator){
+    let sum;
+    let blnValidated = true;
+    if(isNaN(number1)){
+        blnValidated = false
+        sum = 'Number 1 is not a valid number'
+    }
+    if(isNaN(number2)){
+        blnValidated = false;
+        sum = 'Number 2 is not a valid number';
+    }
+
+
+if(blnValidated){
+    switch(operator){
+        case '+':
+            sum = number1 + number2;
+        break;
+        case '-':
+            sum = number1 - number2;
+        break;
+        case '*':
+            sum = number1 * number2;
+        break;
+        case '/':
+            sum = number1 / number2;
+        break;
+        case '%':
+            sum = number1 % number2;
+        break; 
+        default:
+            sum = 'operator is not valid';                   
+    }
+}
+    console.log(sum)
+}
+
+calculator(10,5,'+');
+calculator(10,5,'-');
+calculator(10,5,'*');
+calculator(10,5,'/');
+calculator(10,5,'%');
+calculator('alex',5,'+');
+calculator(10,'apples','+');
+calculator(10,5,'$');
