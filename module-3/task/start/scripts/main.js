@@ -180,3 +180,30 @@ objItems = {
 console.log(objItems.productName);
 
 console.log(objItems['quantity']);
+
+objItems.productName = 'Sliced Bread';
+
+objItems['quantity'] = 10;
+
+console.log(objItems);
+
+objItems.newVariable = 'New';
+
+objItems['anotherNewVariable'] = 'Another';
+
+console.log(objItems);
+
+function outputTimesTables(number){
+
+    for(multiplyer=1; multiplyer <= 12; multiplyer++){
+        let sum=multiplyer * number;
+        strMessage = number + '*' + multiplyer + ' = ' + sum;
+        console.log(strMessage);
+    }
+
+
+}
+
+for(counter=1; counter <=12; counter++){
+ outputTimesTables(counter);
+}
