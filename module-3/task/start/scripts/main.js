@@ -207,3 +207,81 @@ function outputTimesTables(number){
 for(counter=1; counter <=12; counter++){
  outputTimesTables(counter);
 }
+
+console.log(shoppingCart);
+
+function totalPriceOfShopping(arrCart,objCoupon){
+    console.log(objCoupon);
+    //SET totalPrice = 0
+    let totalPrice = 0;
+    //LOOP through arrCart
+    for(arrCartKey=0; arrCartKey < arrCart.length; arrCartKey++){
+        let currentItem = arrCart[arrCartKey];
+        // console.log(currentItem);
+        //SET itemPrice = quantity * price
+        let currentItemPrice = currentItem.quantity * currentItem.price;
+        // UPDATE totalPrice + itemPrice
+        if(objCoupon){
+            blnApplyDiscount = false;
+            if(objCoupon.productType == 'all'){
+                blnApplyDiscount = true;
+                //DISCOUNT for all products
+            }
+            if(objCoupon.productType.includes(currentItem.type)){
+                blnApplyDiscount = true;
+                //APPLY discount for specific product types onlue
+            }
+            switch(objCoupon.type){
+                case 'percent':
+                    if(blnApplyDiscount){
+                        currentItemPrice = (currentItemPrice / 100) * objCoupon.value;
+                        //PERCENT discount
+                    }
+                break;
+                case 'flat':
+                    if(blnApplyDiscount){
+                        currentItemPrice = currentItemPrice - (objCoupon.value * currentItem.quantity);
+                        //FLAT discount
+                    }
+                break;
+            }
+        }
+        totalPrice = totalPrice + currentItemPrice;
+    }
+    //RETURN totalPrice
+    if(objCoupon){
+        if(objCoupon.type == 'fixed'){
+            totalPrice = totalPrice - objCoupon.value;
+        }
+    }
+    totalPrice = totalPrice.toFixed(2);
+    return totalPrice;
+}
+
+objCouponData = {
+    type:'percent',
+    productType:['toiletries','beverages'],
+    value:'50'
+}
+
+console.log(totalPriceOfShopping(shoppingCart,objCouponData));
+
+function itemsOfType(arrCart){
+    objItems = {};
+    for(arrCartKey=0; arrCartKey < arrCart.length; arrCartKey++){
+       let currentItem = arrCart[arrCartKey];
+       if(objItems[currentItem.type]){
+           objItems[currentItem.type] = objItems[currentItem.type] + currentItem.quantity;
+       } else {
+           objItems[currentItem.type] = currentItem.quantity;
+       }
+       //console.log(currentItem);
+       // console.log(objItems);
+
+    }
+    return objItems;
+}
+
+console.log(itemsOfType(shoppingCart));
+
+
